@@ -16,7 +16,8 @@ var res = diff.applyChangesToString(changes, "cat");
 
 //should be "bat"
 
-
+Merge
+===========================
 var changes2 = diff.getEditPath("cat", "the cat");
 
 var merge = diff.mergeChanges(changes, changes2);
