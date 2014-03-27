@@ -149,6 +149,35 @@ function Diff(){
         }
         return baseStrArray;
     }
+    
+    this.mergeChanges = function(changes1, changes2) {
+        var localChanges2 = changes2.slice();
+        var merge = changes1.slice();
+        for (var i = 0; i < merge.length; i++) {
+            var j = 0;
+            while (localChanges2.length > 0 && j < localChanges2.length) {
+                if (localChanges2[j].pos <= merge[i].pos) {
+                    var toInsert = new Array();
+                    for (var k = j; k < localChanges2.length; k++) {
+                        if (localChanges2[k].pos <= merge[i].pos) {
+                            toInsert.push(localChanges2[k]);
+                        } else {
+                            break;
+                        }
+                    }
+                    merge.splice.apply(merge, [i, 0].concat(toInsert));
+      
+                    localChanges2.splice(j, toInsert.length); //take it out
+                } else {
+                    j++;
+                }
+            }
+        }
+        if (localChanges2.length > 0) {
+            merge = merge.concat(localChanges2);
+        }
+        return merge;
+    }
 }
 
 function Change(type, val, pos) {
