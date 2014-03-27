@@ -149,7 +149,8 @@ function Diff(){
         }
         return baseStrArray;
     }
-    
+    /*mergeChanges(oldChanges, newChanges) : the combination of 'changes1' and 'changes2'.
+    when applied this should result in a string resulting from both 'changes1' and 'changes2'*/
     this.mergeChanges = function(changes1, changes2) {
         var localChanges2 = changes2.slice();
         var merge = changes1.slice();
